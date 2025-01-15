@@ -1,5 +1,3 @@
-# Reference : https://github.com/DrBorg/YTScripts/blob/main/UsingWinget.ps1
-
 #======================================================================
 # NO POWERSHELL WINDOW DURING THE INSTALL
 #======================================================================
@@ -92,6 +90,39 @@ foreach ($package in $packages) {
     Write-Host "Installing $package..."
     winget install $package -h --accept-package-agreements --accept-source-agreements
     Write-Host "$package installed successfully."
+}
+# Actualizar la variable de entorno PATH
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+# Refresh the profile
+. $PROFILE
+#======================================================================
+# VERIFY CLI AND PROGRAMS
+#======================================================================
+Write-Host "Verifying installed CLIs..."
+$cli_checks = @{
+  "k6" = "k6 --version"
+  "node" = "node --version"
+  "npm" = "npm --version"
+  "code" = "code --version"
+  "dotnet" = "dotnet --version"
+  "git" = "git --version"
+  "vault" = "vault --version"
+  "pnpm" = "pnpm -v"
+  "yarn" = "yarn -v"
+  "yo" = "yo --version"
+}
+foreach ($command in $cli_checks) {
+  Write-Host "Checking $command..."
+  try {
+    $output = Invoke-Expression  $command
+    if ($output) {
+      Write-Host "$command $($output.Trim())"
+    } else {
+      Write-Host "$command Not Found"
+    }
+  } catch {
+    Write-Host "$command Error during check"
+  }
 }
 
 # ---------------------------------
