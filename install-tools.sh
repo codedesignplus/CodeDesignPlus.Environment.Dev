@@ -2,6 +2,10 @@
 
 set -e # Exit immediately if a command fails
 
+sudo apt update
+sudo apt upgrade -y
+sudo apt install curl
+
 echo "---------------------------------"
 echo "STARTING INSTALLATION SCRIPT"
 echo "---------------------------------"
