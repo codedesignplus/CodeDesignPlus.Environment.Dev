@@ -78,8 +78,8 @@ $packages = @(
     "Postman.Postman",
     "drawio.drawio",
     "MongoDB.Compass",
-     "grafana.k6",
-     "Docker.DockerDesktop",
+    "grafana.k6",
+    "Docker.DockerDesktop",
     "HashiCorp.Vault",
     "pnpm.pnpm",
     "Yarn.Yarn",
@@ -107,8 +107,8 @@ $cli_checks = @{
   "dotnet" = "dotnet --version"
   "git" = "git --version"
   "vault" = "vault --version"
-  "pnpm" = "pnpm -v"
-  "yarn" = "yarn -v"
+  "pnpm" = "pnpm --version"
+  "yarn" = "yarn --version"
   "yo" = "yo --version"
 }
 foreach ($command in $cli_checks) {
